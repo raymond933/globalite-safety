@@ -6,120 +6,110 @@ export const dynamic = "force-dynamic";
 export default async function CategoryPage({ params }) {
   const { slug } = params;
 
-  console.log("==== CATEGORY PAGE DEBUG START ====");
   console.log("Slug:", slug);
   console.log("API BASE:", process.env.NEXT_PUBLIC_API_BASE);
 
+  /* =========================
+     1️⃣ FETCH CATEGORY
+  ========================= */
+  const catUrl = `${process.env.NEXT_PUBLIC_API_BASE}/categories.php?slug=${slug}`;
+  console.log("Category API URL:", catUrl);
+
+  const catRes = await fetch(catUrl, { cache: "no-store" });
+
+  const rawCategory = await catRes.text();
+  console.log("Raw Category Response:", rawCategory);
+
+  let category;
   try {
-    /* -----------------------------
-       1. FETCH CATEGORY
-    ----------------------------- */
-    const categoryUrl = `${process.env.NEXT_PUBLIC_API_BASE}/categories.php?slug=${slug}`;
-    console.log("Category API URL:", categoryUrl);
+    const parsed = JSON.parse(rawCategory);
 
-    const catRes = await fetch(categoryUrl, { cache: "no-store" });
+    // handle object OR array
+    category = Array.isArray(parsed) ? parsed[0] : parsed;
+  } catch (err) {
+    console.log("Category JSON Parse Error");
+    return <ErrorMsg text="Category API error" />;
+  }
 
-    console.log("Category Response Status:", catRes.status);
+  if (!category?.id) {
+    console.log("Category ID missing");
+    return <ErrorMsg text="Invalid category" />;
+  }
 
-    const catText = await catRes.text();
-    console.log("Raw Category Response:", catText);
+  console.log("Category ID:", category.id);
 
-    let catData;
-    try {
-      catData = JSON.parse(catText);
-    } catch (err) {
-      console.log("Category JSON Parse Error:", err);
-      return <ErrorMsg text="Category JSON invalid" />;
-    }
+  /* =========================
+     2️⃣ FETCH PRODUCTS
+  ========================= */
+  const prodUrl = `${process.env.NEXT_PUBLIC_API_BASE}/category-products.php?category_id=${category.id}`;
+  console.log("Product API URL:", prodUrl);
 
-    const category = Array.isArray(catData) ? catData[0] : catData;
+  const prodRes = await fetch(prodUrl, { cache: "no-store" });
 
-    console.log("Parsed Category:", category);
+  const rawProducts = await prodRes.text();
+  console.log("Raw Products Response:", rawProducts);
 
-    if (!category || !category.id) {
-      console.log("Category ID missing");
-      return <ErrorMsg text="Invalid category" />;
-    }
+  let products = [];
+  try {
+    products = JSON.parse(rawProducts);
+  } catch {
+    console.log("Products JSON Parse Error");
+  }
 
-    /* -----------------------------
-       2. FETCH PRODUCTS
-    ----------------------------- */
-    const productUrl = `${process.env.NEXT_PUBLIC_API_BASE}/category-products.php?category_id=${Number(category.id)}`;
-    console.log("Product API URL:", productUrl);
+  console.log("Parsed Products:", products);
 
-    const prodRes = await fetch(productUrl, { cache: "no-store" });
+  /* =========================
+     3️⃣ RENDER
+  ========================= */
+  return (
+    <>
+      <Image
+        src="/images/hero-img.webp"
+        width={1920}
+        height={400}
+        alt={category.name}
+        className="img-fluid"
+        priority
+      />
 
-    console.log("Product Response Status:", prodRes.status);
+      <div className="container py-5">
+        <h1 className="text-center mb-4">{category.name}</h1>
 
-    const prodText = await prodRes.text();
-    console.log("Raw Product Response:", prodText);
+        {products.length === 0 && (
+          <p className="text-center">No products found.</p>
+        )}
 
-    let products = [];
-    try {
-      products = JSON.parse(prodText);
-    } catch (err) {
-      console.log("Product JSON Parse Error:", err);
-      products = [];
-    }
+        <div className="row">
+          {products.map((p) => (
+            <div key={p.id} className="col-lg-3 col-md-4 col-sm-6 mt-4">
+              <div className="card h-100 shadow-sm">
+                <Link href={`/product/${p.slug}`}>
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_IMG_BASE}/${p.image_path}`}
+                    alt={p.name}
+                    width={600}
+                    height={600}
+                    unoptimized
+                    className="img-fluid"
+                  />
+                </Link>
 
-    console.log("Parsed Products:", products);
-    console.log("==== CATEGORY PAGE DEBUG END ====");
-
-    /* -----------------------------
-       3. RENDER
-    ----------------------------- */
-    return (
-      <>
-        <div style={{ padding: 20, background: "#f8f8f8" }}>
-          <h3>Debug Mode Active</h3>
-          <p>Check Vercel Function Logs for details.</p>
-        </div>
-
-        <div className="container py-5">
-          <h1 className="text-center mb-4">{category.name}</h1>
-
-          {products.length === 0 && (
-            <p className="text-center">No products found.</p>
-          )}
-
-          <div className="row">
-            {products.map((p) => (
-              <div
-                key={p.id}
-                className="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mt-4"
-              >
-                <div className="card h-100 shadow-sm">
-                  <Link href={`/product/${p.slug}`}>
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_IMG_BASE}/${p.image_path}`}
-                      alt={p.name}
-                      width={800}
-                      height={800}
-                      unoptimized
-                      className="img-fluid"
-                    />
+                <div className="card-body text-center">
+                  <h3 style={{ fontSize: 16 }}>{p.name}</h3>
+                  <Link
+                    href={`/product/${p.slug}`}
+                    className="btn btn-dark btn-sm rounded-5 px-4"
+                  >
+                    View Detail
                   </Link>
-
-                  <div className="card-body text-center">
-                    <h3 style={{ fontSize: 16 }}>{p.name}</h3>
-                    <Link
-                      href={`/product/${p.slug}`}
-                      className="btn btn-dark btn-sm rounded-5 px-4"
-                    >
-                      View Detail
-                    </Link>
-                  </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      </>
-    );
-  } catch (error) {
-    console.log("Unexpected Error:", error);
-    return <ErrorMsg text="Unexpected server error" />;
-  }
+      </div>
+    </>
+  );
 }
 
 function ErrorMsg({ text }) {
