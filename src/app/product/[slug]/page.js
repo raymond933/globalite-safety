@@ -3,7 +3,9 @@ import Image from "next/image";
 export const dynamic = "force-dynamic";
 
 export default async function ProductPage({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
+
+  console.log("Product Slug:", slug);
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE}/product-detail.php?slug=${slug}`,
