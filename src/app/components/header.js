@@ -93,27 +93,27 @@ export default function Header() {
                 </Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link className="dropdown-item" href="#">
+                    <Link className="dropdown-item" href="/our-services">
                       On Site Loto Survey
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" href="#">
+                    <Link className="dropdown-item" href="/loto-training">
                       Loto Training
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" href="#">
+                    <Link className="dropdown-item" href="/lockout-tagout-policy-and-procedures">
                       Lockout Tagout Policy And Procedures
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" href="#">
+                    <Link className="dropdown-item" href="/machine-specific-procedures">
                       Machine Specific Procedures
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" href="#">
+                    <Link className="dropdown-item" href="/installation-and-implementation">
                       Installation and Implementation
                     </Link>
                   </li>

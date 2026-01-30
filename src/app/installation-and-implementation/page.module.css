@@ -34,21 +34,7 @@
     margin-bottom: 15px;
 }
 
-.clients{
-    list-style: none;
-    padding: 0px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.clients li{
-    width: 13%;
-    border: 1px solid #bebebe;
-    margin: 5px;
-}
-
-.textLg{
+.textlarge{
     font-size: 20px;
     font-style: italic;
 }
