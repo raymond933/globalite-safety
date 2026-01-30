@@ -20,6 +20,8 @@ export default async function CategoryPage({ params }) {
   const rawCategory = await catRes.text();
   console.log("Raw Category Response:", rawCategory);
 
+  console.log("ENV CHECK:", process.env.NEXT_PUBLIC_API_BASE);
+
   let category;
   try {
     const parsed = JSON.parse(rawCategory);
