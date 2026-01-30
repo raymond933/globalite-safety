@@ -21,6 +21,7 @@ export default async function CategoryPage({ params }) {
   console.log("Raw Category Response:", rawCategory);
 
   console.log("ENV CHECK:", process.env.NEXT_PUBLIC_API_BASE);
+  console.log("ENV:", process.env.NEXT_PUBLIC_API_BASE);
 
   let category;
   try {
