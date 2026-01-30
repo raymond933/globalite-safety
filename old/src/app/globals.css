@@ -1,0 +1,152 @@
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --red: #EE2222;
+  --white: #ffffff;
+  --grey: #f3f3f3;
+  --black80: #111111;
+  --black70: #333333;
+}
+
+*{
+  padding: 0px;
+  margin: 0px;
+}
+
+body{
+  background-color: var(--background);
+  font-family: var(--font-open-sans);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-poppins);
+  font-weight: 600;
+}
+
+.text-red{
+  color: var(--red);
+}
+
+.nav-link{
+  color: #111111;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.nav-item{
+  padding: 5px 5px;
+}
+
+.top-bar{
+  padding: 3px 0px;
+  background: #fafafa;
+}
+
+.topbar-links{
+  list-style: none;
+  padding: 0px;
+  display: flex;
+  justify-content: end;
+  margin: 0px;
+}
+
+.topbar-links li{
+  margin: 0px 5px;
+}
+
+.topbar-links li a{
+  text-decoration: none;
+  color: #111111;
+}
+
+.product-menu-bar{
+  background: #333;
+}
+
+.product-menu{
+  list-style: none;
+  padding: 0px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0px;
+  padding: 5px 0px;
+}
+
+.product-menu li a{
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+footer{
+  background: url(/images/footer-bg.webp) no-repeat center center;
+  background-size: cover;
+  position: relative;
+  z-index: 0;
+}
+
+footer::before{
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+footer h4{
+  color: #ffffff;
+}
+
+footer ul{
+  list-style: none;
+  padding: 0px;
+}
+
+footer ul li a{
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.copyright{
+  background: #111111;
+  text-align: center;
+  color: #ffffff;
+  padding: 8px 0px;
+}
+
+/* .catProDetail{
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+} */
+
+.proCardDec{
+  padding: 30px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 30px;
+}
+
+.proTable table{
+  width: 100%;
+  font-size: 14px;
+}
+
+.proTable table tr td{
+  padding: 8px 15px;
+  border: 1px solid var(--grey);
+}
+
+.proTable table tr:nth-child(even){
+  background: var(--grey);
+}
+
+.proTable table tr td:first-child{
+  font-weight: bold;
+}

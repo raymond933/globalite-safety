@@ -1,0 +1,35 @@
+.innerherobanner{
+    background: url(/images/hero-bg-inner.jpg) no-repeat 50% 50% fixed;
+    background-size: cover;
+    height: 200px;
+    position: relative;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.innerherobanner::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: rgba(0,0,0,0.7);
+    z-index: -1;
+}
+
+.p{
+    text-align: justify;
+}
+
+.divider{
+    height: 2px;
+    width: 100px;
+    background: var(--red);
+    margin: auto;
+    margin-bottom: 15px;
+}
