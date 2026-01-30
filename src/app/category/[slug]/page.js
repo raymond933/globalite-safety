@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
-export default async function CategoryPage({ props }) {
+export default async function CategoryPage(props) {
   const slug = props?.params?.slug;
 
   console.log("Slug:", slug);
