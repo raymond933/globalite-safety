@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
-export default async function CategoryPage(props) {
-  const slug = props?.params?.slug;
+export default async function CategoryPage({ params }) {
+  const { slug } = await params;
 
   console.log("Slug:", slug);
   console.log("API BASE:", process.env.NEXT_PUBLIC_API_BASE);
