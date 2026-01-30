@@ -2,99 +2,118 @@ import Image from "next/image";
 import Link from "next/link";
 
 /**
- * IMPORTANT
- * Category page ko dynamic rakho
- * (No build-time API calls)
+ * Force dynamic rendering (no build-time caching)
  */
 export const dynamic = "force-dynamic";
 
 export default async function CategoryPage({ params }) {
   const { slug } = params;
 
-  /* -----------------------------
-     1. GET CATEGORY (slug → id)
-  ----------------------------- */
-  const catRes = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE}/categories.php?slug=${slug}`,
-    { cache: "no-store" }
-  );
+  try {
+    /* -----------------------------
+       1. GET CATEGORY (slug → id)
+    ----------------------------- */
+    const catRes = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE}/categories.php?slug=${slug}`,
+      { cache: "no-store" }
+    );
 
-  if (!catRes.ok) {
-    return <ErrorMsg text="Category not found" />;
-  }
+    if (!catRes.ok) {
+      return <ErrorMsg text="Category fetch failed" />;
+    }
 
-  const category = await catRes.json();
+    const catText = await catRes.text();
 
-  if (!category?.id) {
-    return <ErrorMsg text="Invalid category" />;
-  }
+    let catData;
+    try {
+      catData = JSON.parse(catText);
+    } catch {
+      return <ErrorMsg text="Invalid API response (Category)" />;
+    }
 
-  /* -----------------------------
-     2. GET PRODUCTS (by category_id)
-  ----------------------------- */
-  const prodRes = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE}/category-products.php?category_id=${Number(category.id)}`,
-    { cache: "no-store" }
-  );
+    // Handle both array and object response
+    const category = Array.isArray(catData) ? catData[0] : catData;
 
-  const products = prodRes.ok ? await prodRes.json() : [];
+    if (!category || !category.id) {
+      return <ErrorMsg text="Invalid category" />;
+    }
 
-  /* -----------------------------
-     3. RENDER
-  ----------------------------- */
-  return (
-    <>
-      {/* HERO IMAGE */}
-      <Image
-        src="/images/hero-img.webp"
-        width={1920}
-        height={400}
-        alt={category.name}
-        className="img-fluid"
-        priority
-      />
+    /* -----------------------------
+       2. GET PRODUCTS
+    ----------------------------- */
+    const prodRes = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE}/category-products.php?category_id=${Number(category.id)}`,
+      { cache: "no-store" }
+    );
 
-      <div className="container py-5">
-        <h1 className="text-center mb-4">{category.name}</h1>
+    const prodText = prodRes.ok ? await prodRes.text() : "[]";
 
-        {products.length === 0 && (
-          <p className="text-center">No products found.</p>
-        )}
+    let products = [];
+    try {
+      products = JSON.parse(prodText);
+    } catch {
+      products = [];
+    }
 
-        <div className="row">
-          {products.map((p) => (
-            <div
-              key={p.id}
-              className="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mt-4"
-            >
-              <div className="card h-100 shadow-sm">
-                <Link href={`/product/${p.slug}`}>
-                  <Image
-                    src={`${process.env.NEXT_PUBLIC_IMG_BASE}/${p.image_path}`}
-                    alt={p.name}
-                    width={800}
-                    height={800}
-                    unoptimized
-                    className="img-fluid"
-                  />
-                </Link>
+    /* -----------------------------
+       3. RENDER
+    ----------------------------- */
+    return (
+      <>
+        {/* HERO IMAGE */}
+        <Image
+          src="/images/hero-img.webp"
+          width={1920}
+          height={400}
+          alt={category.name}
+          className="img-fluid"
+          priority
+        />
 
-                <div className="card-body text-center">
-                  <h3 style={{ fontSize: 16 }}>{p.name}</h3>
-                  <Link
-                    href={`/product/${p.slug}`}
-                    className="btn btn-dark btn-sm rounded-5 px-4"
-                  >
-                    View Detail
+        <div className="container py-5">
+          <h1 className="text-center mb-4">{category.name}</h1>
+
+          {products.length === 0 && (
+            <p className="text-center">No products found.</p>
+          )}
+
+          <div className="row">
+            {products.map((p) => (
+              <div
+                key={p.id}
+                className="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mt-4"
+              >
+                <div className="card h-100 shadow-sm">
+                  <Link href={`/product/${p.slug}`}>
+                    <Image
+                      src={`${process.env.NEXT_PUBLIC_IMG_BASE}/${p.image_path}`}
+                      alt={p.name}
+                      width={800}
+                      height={800}
+                      unoptimized
+                      className="img-fluid"
+                    />
                   </Link>
+
+                  <div className="card-body text-center">
+                    <h3 style={{ fontSize: 16 }}>{p.name}</h3>
+                    <Link
+                      href={`/product/${p.slug}`}
+                      className="btn btn-dark btn-sm rounded-5 px-4"
+                    >
+                      View Detail
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  } catch (error) {
+    return <ErrorMsg text="Something went wrong" />;
+  }
 }
 
 /* ---------------------------------------
