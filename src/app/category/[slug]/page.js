@@ -3,11 +3,15 @@ import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
-export default async function CategoryPage({ params }) {
-  const { slug } = params;
+export default async function CategoryPage({ props }) {
+  const slug = props?.params?.slug;
 
   console.log("Slug:", slug);
   console.log("API BASE:", process.env.NEXT_PUBLIC_API_BASE);
+
+  if (!slug) {
+    return <h2 style={{ padding: 40 }}>Slug missing</h2>;
+  }
 
   /* =========================
      1️⃣ FETCH CATEGORY
