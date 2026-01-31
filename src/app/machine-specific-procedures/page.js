@@ -1,13 +1,17 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function MachineSpecificProcedures(){
     return(
         <>
             <div className={styles.innerherobanner}>
                 <h2>Machine Specific Procedures</h2>
+                <div className="breadcrumb">
+                    <Link href="/">Home</Link> | Machine Specific Procedures
+                </div>
             </div>
-            <div className="container py-5">
+            <div className="container pt-5 pb-2">
                 <div className="row justify-content-center">
                     <div className="col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 text-center">
                         <p>At Globalite Safety, we offer comprehensive services for creating machine-specific procedures for energy isolation, ensuring maximum safety and compliance in your workplace. Our customized solution helps your organization effectively control hazardous energy during servicing and maintenance activities.</p>
@@ -75,6 +79,48 @@ export default function MachineSpecificProcedures(){
                     <div className="col-12 mt-4">
                         <p>Contact us today to learn more about our machine-specific energy isolation services and how we can assist your organization in creating a safer and more compliant workplace.</p>
                         <p>By choosing Globalite Safety, you are investing in the safety and efficiency of your operations, ensuring that all hazardous energy sources are effectively managed and controlled.</p>
+                    </div>
+                </div>
+            </div>
+            <div className="container py-5">
+                <div className="row justify-content-center">
+                    <div className="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+                        <div className="card shadow border-0">
+                                <div className="card-body p-4">
+                                    <form>
+                                <div className="row g-2">
+                                    <div className="col-12 text-center">
+                                        <h2 className="text-red">Enquiry Now</h2>
+                                    </div>
+                                    <div className="col-12 mt-2">
+                                        <input type="text" name="full name" className="form-control" placeholder="Full Name"/>
+                                    </div>
+                                    <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mt-2">
+                                        <input type="email" name="email" className="form-control" placeholder="Email"/>
+                                    </div>
+                                    <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mt-2">
+                                        <input type="tel" name="contact" className="form-control" placeholder="Contact No."/>
+                                    </div>
+                                    <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mt-2">
+                                        <input type="text" name="company" className="form-control" placeholder="Company"/>
+                                    </div>
+                                    <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mt-2">
+                                        <input type="text" name="city" className="form-control" placeholder="City"/>
+                                    </div>
+                                    <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mt-2">
+                                        <input type="text" name="country" className="form-control" placeholder="Country"/>
+                                    </div>
+                                    <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mt-2">
+                                        <input type="text" name="address" className="form-control" placeholder="Address"/>
+                                    </div>
+                                    <div className="col-12 mt-2">
+                                        <textarea rows="4" className="form-control" placeholder="Message"></textarea>
+                                    </div>
+                                </div>
+                                <button type="submit" className="btn btn-danger mt-3">Submit Message</button>
+                            </form>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>

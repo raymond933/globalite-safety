@@ -1,11 +1,15 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function WhyChooseGlobalite(){
     return(
         <>
             <div className={styles.innerherobanner}>
                 <h2>Why Choose Us</h2>
+                <div className="breadcrumb">
+                    <Link href="/">Home</Link> | Why Choose Us
+                </div>
             </div>
             <div className="container py-5">
                 <div className="row">

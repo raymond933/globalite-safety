@@ -7,6 +7,9 @@ export default function OurClient(){
         <>
             <div className={styles.innerherobanner}>
                 <h2>Our Clients</h2>
+                <div className="breadcrumb">
+                    <Link href="/">Home</Link> | Our Clients
+                </div>
             </div>
             <div className="container py-5">
                 <div className="row">

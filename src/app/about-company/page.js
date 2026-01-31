@@ -1,11 +1,15 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function AboutCompany(){
     return(
         <>
             <div className={styles.innerherobanner}>
                 <h2>About Company</h2>
+                <div className="breadcrumb">
+                    <Link href="/">Home</Link> | About Company
+                </div>
             </div>
             <div className="container py-5">
                 <div className="row">

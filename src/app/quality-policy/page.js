@@ -1,11 +1,15 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function QualityPolicy(){
     return(
         <>
             <div className={styles.innerherobanner}>
                 <h2>Quality Policy</h2>
+                <div className="breadcrumb">
+                    <Link href="/">Home</Link> | Quality Policy
+                </div>
             </div>
             <div className="container pt-5 pb-3">
                 <div className="row justify-content-center">

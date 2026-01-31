@@ -120,12 +120,12 @@ export default function Header() {
                 </ul>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="#">
+                <Link className="nav-link" href="/what-is-loto">
                   What is Loto
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="#">
+                <Link className="nav-link" href="/contact">
                   Contact Us
                 </Link>
               </li>
@@ -212,11 +212,11 @@ export default function Header() {
           <div className="lockout-tags">
             <div className="container">
               <div className="row">
-                <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                   <h4>Lockout Tags, Stations & Safety Signs</h4>
                   <p>At Globalite Safety, we understand that workplace safety isn’t optional — it’s essential. Our range of Lockout/Tagout (LOTO) solutions and safety signage is designed to protect workers, maintain regulatory compliance, and create a hazard-free environment.</p>
                 </div>
-                <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                   <ul className="dropdown-links">
                     <li><Link href="/category/lockout-tags">Lockout Tags</Link></li>
                     <li><Link href="/category/customized-tags">Customized Tags</Link></li>
@@ -236,11 +236,11 @@ export default function Header() {
           <div className="lockout-accessories">
             <div className="container">
               <div className="row">
-                <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                   <h4>Lockout Accessories & Other Products</h4>
                   <p>At Globalite Safety, we offer a comprehensive range of lockout accessories to support your lockout/tagout (LOTO) procedures. These accessories are designed to enhance worker safety, improve compliance with OSHA standards, and streamline your isolation processes across electrical, mechanical, hydraulic, and pneumatic systems.</p>
                 </div>
-                <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                   <ul className="dropdown-links">
                     <li><Link href="#">Lockout Accessories</Link></li>
                     <li><Link href="#">Lockout Registers</Link></li>
