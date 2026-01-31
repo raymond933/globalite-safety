@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -40,8 +41,8 @@ export default async function ProductPage({ params }) {
           <h2>{product.name}</h2>
           <div><strong>SKU:</strong> {product.sku}</div>
           <hr />
-
           <div dangerouslySetInnerHTML={{ __html: product.description }} />
+          <Link href="/contact" className="btn btn-dark">Enquiry Now</Link>
         </div>
       </div>
     </main>
