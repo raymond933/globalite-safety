@@ -42,7 +42,7 @@ export default async function ProductPage({ params }) {
           <div><strong>SKU:</strong> {product.sku}</div>
           <hr />
           <div dangerouslySetInnerHTML={{ __html: product.description }} />
-          <Link href="/contact" className="btn btn-dark">Enquiry Now</Link>
+          <Link href="/contact" className="btn btn-dark mt-5">Enquiry Now</Link>
         </div>
       </div>
     </main>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer(){
@@ -49,6 +50,47 @@ export default function Footer(){
         <div className="copyright" style={{fontSize:14}}>
             Copyright © 2026 All rights reserved by Globalite Safety Solutions Private Limited | Developed by: Keyword India Network Pvt. Ltd.
         </div>
+        <Link href="#" className="btnWhatsapp"><Image src="/images/social.png" width={50} height={50} className="img-fluid" alt=""/></Link>
+        <Link href="#" className="btnQuote" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <Image src="/images/btn-quote.png" height={230} width={35} className="img-fluid" alt=""/>
+        </Link>
+
+
+<div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div className="modal-dialog modal-dialog-centered">
+    <div className="modal-content">
+      <div className="modal-body">
+        <form>
+                                <div className="row g-2">
+                                    <div className="col-12 text-end">
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div className="col-12 text-center">
+                                        <h2 className="text-red">Request A Quote</h2>
+                                    </div>
+                                    <div className="col-12 mt-2">
+                                        <input type="text" name="full name" className="form-control rounded-0" placeholder="Full Name"/>
+                                    </div>
+                                    <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mt-2">
+                                        <input type="email" name="email" className="form-control rounded-0" placeholder="Email"/>
+                                    </div>
+                                    <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mt-2">
+                                        <input type="tel" name="contact" className="form-control rounded-0" placeholder="Contact No."/>
+                                    </div>
+                                    <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-2">
+                                        <input type="text" name="subject" className="form-control rounded-0" placeholder="Subject"/>
+                                    </div>
+                                    <div className="col-12 mt-2">
+                                        <textarea rows="4" className="form-control rounded-0" placeholder="Message"></textarea>
+                                    </div>
+                                </div>
+                                <button type="submit" className="btn btn-dark rounded-0 mt-3">Submit Message</button>
+                            </form>
+      </div>
+    </div>
+  </div>
+</div>
+
         </>
     );
 }
